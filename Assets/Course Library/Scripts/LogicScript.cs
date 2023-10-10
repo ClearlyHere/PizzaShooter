@@ -25,7 +25,6 @@ namespace Course_Library.Scripts
             _player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
             _scoreText = GameObject.Find("Text").GetComponent<TMP_Text>();
             _gameOverText = gameOverScore.GetComponent<TMP_Text>();
-            Debug.Log($"Score: {_score}");
             gameOverScreen.SetActive(false);
         }
 
@@ -39,7 +38,7 @@ namespace Course_Library.Scripts
             if (_gameOver) return;
             _score++;
             hitSfx.Play();
-            Debug.Log($"Score: {_score}");
+            Debug.Log("Score: {_score}");
             UpdateScoreUI();
         }
 

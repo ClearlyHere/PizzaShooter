@@ -19,10 +19,10 @@ namespace Course_Library.Scripts
 
         private void Movement()
         {
-            if (gameObject.CompareTag($"Food"))
+            if (gameObject.CompareTag("Food"))
                 transform.Translate(Vector3.forward * (FoodMoveSpeed * Time.deltaTime));
 
-            else if (gameObject.CompareTag($"Animal"))
+            else if (gameObject.CompareTag("Animal"))
                 transform.Translate(Vector3.forward * (AnimalMoveSpeed * Time.deltaTime));
         }
 

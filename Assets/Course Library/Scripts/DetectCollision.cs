@@ -8,12 +8,12 @@ namespace Course_Library.Scripts
 
         private void Start()
         {
-            _logic = GameObject.FindWithTag($"Logic").GetComponent<LogicScript>();
+            _logic = GameObject.FindWithTag("Logic").GetComponent<LogicScript>();
         }
 
         private void OnTriggerEnter(Collider otherCollider)
         {
-            if (gameObject.CompareTag($"Animal") && otherCollider.CompareTag($"Animal"))
+            if (gameObject.CompareTag("Animal") && otherCollider.CompareTag("Animal"))
             {
                 // Pass, don't destroy
             }
@@ -23,7 +23,7 @@ namespace Course_Library.Scripts
                 // Pass, don't destroy
             }
 
-            else if (gameObject.CompareTag($"Food"))
+            else if (gameObject.CompareTag("Food"))
             {
                 _logic.AddScore();
                 Destroy(gameObject);

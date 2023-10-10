@@ -39,7 +39,7 @@ namespace Course_Library.Scripts
 
         private void Start()
         {
-            _logic = GameObject.FindWithTag($"Logic").GetComponent<LogicScript>();
+            _logic = GameObject.FindWithTag("Logic").GetComponent<LogicScript>();
         }
 
         private void OnEnable()
@@ -59,7 +59,7 @@ namespace Course_Library.Scripts
 
         private void OnTriggerEnter(Collider otherCollider)
         {
-            if (!otherCollider.CompareTag($"Animal") || _lives < 1 || _logic.IsGameOver()) return;
+            if (!otherCollider.CompareTag("Animal") || _lives < 1 || _logic.IsGameOver()) return;
             switch (_lives)
             {
                 case > 1:
@@ -137,7 +137,6 @@ namespace Course_Library.Scripts
         private void LoseLife()
         {
             _lives--;
-            Debug.Log($"Lives: {_lives}");
         }
 
         public int GetLives()
