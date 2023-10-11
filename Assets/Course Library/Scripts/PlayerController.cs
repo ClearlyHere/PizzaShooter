@@ -8,23 +8,18 @@ namespace Course_Library.Scripts
     {
         // Player input
         private PlayerInputs _playerControls;
-        public GameObject projectile;
 
         private int _lives = 3;
         private bool _isAlive = true;
 
         private LogicScript _logic;
         private InputAction _move;
-        private InputAction _fire;
 
         private const float MoveSpeed = 15f;
         private const float MovementRestriction = 20f;
         private const float TopBound = 31f;
         private const float BottomBound = 10f;
         private Vector3 _moveDirection = Vector3.zero;
-
-        [FormerlySerializedAs("shootSFX")] [SerializeField]
-        private AudioSource shootSfx;
 
         [FormerlySerializedAs("hurtSFX")] [SerializeField]
         private AudioSource hurtSfx;
@@ -46,15 +41,11 @@ namespace Course_Library.Scripts
         {
             _move = _playerControls.Player.Move;
             _move.Enable();
-            _fire = _playerControls.Player.Fire;
-            _fire.Enable();
-            _fire.performed += Fire;
         }
 
         private void OnDisable()
         {
             _move.Disable();
-            _fire.Disable();
         }
 
         private void OnTriggerEnter(Collider otherCollider)
@@ -119,14 +110,6 @@ namespace Course_Library.Scripts
                 position = new Vector3(position.x, position.y, BottomBound);
                 transform1.position = position;
             }
-        }
-
-        private void Fire(InputAction.CallbackContext context)
-        {
-            if (!_isAlive) return;
-            shootSfx.Play();
-            var transform1 = transform;
-            Instantiate(projectile, transform1.position, transform1.rotation);
         }
 
         private void Die()
