@@ -21,6 +21,11 @@ namespace Course_Library.Scripts
             else if (gameObject.CompareTag("Player") || otherCollider.CompareTag("Player"))
             {
                 // Pass, don't destroy
+            } 
+            
+            else if (gameObject.CompareTag("Ground") || otherCollider.CompareTag("Ground"))
+            {
+                // Pass, don't destroy
             }
 
             else if (gameObject.CompareTag("Food"))

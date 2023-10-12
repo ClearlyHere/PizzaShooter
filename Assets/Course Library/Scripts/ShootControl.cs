@@ -8,25 +8,23 @@ namespace Course_Library.Scripts
     {
         private PlayerInputs _playerControls;
         private LogicScript _logic;
-        private InputAction _rotate;
         private InputAction _fire;
-        private const float RotationSpeed = 300f;
         public GameObject projectile;
         private PlayerController _player;
         private float _moveRotation;
-        
+
+        [SerializeField] private Camera mainCamera;
+
         [FormerlySerializedAs("shootSFX")] [SerializeField]
         private AudioSource shootSfx;
-        
+
         private void Awake()
         {
             _playerControls = new PlayerInputs();
         }
-        
+
         private void OnEnable()
         {
-            _rotate = _playerControls.Player.Rotate;
-            _rotate.Enable();
             _fire = _playerControls.Player.Fire;
             _fire.Enable();
             _fire.performed += Fire;
@@ -34,16 +32,15 @@ namespace Course_Library.Scripts
 
         private void OnDisable()
         {
-            _rotate.Disable();
             _fire.Disable();
-        }
+        }  
 
         private void Start()
         {
             _player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             ShooterRotation();
         }
@@ -55,12 +52,18 @@ namespace Course_Library.Scripts
             var transform1 = transform;
             Instantiate(projectile, transform1.position, transform1.rotation);
         }
-        
+
         private void ShooterRotation()
         {
-            if (!_player.GetIsAlive()) return;
-            _moveRotation = _rotate.ReadValue<float>();
-            transform.Rotate(Vector3.up * (RotationSpeed * Time.deltaTime * _moveRotation));
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit rayCast, float.MaxValue))
+            {
+                Vector3 shooterPosition = transform.position;
+                Vector3 rayHit = rayCast.point;
+                Vector3 direction = new Vector3(rayHit.x - shooterPosition.x, 0, rayHit.z - shooterPosition.z);
+                transform.forward = direction;
+            }
         }
+
     }
 }

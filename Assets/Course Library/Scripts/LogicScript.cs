@@ -38,7 +38,6 @@ namespace Course_Library.Scripts
             if (_gameOver) return;
             _score++;
             hitSfx.Play();
-            Debug.Log("Score: {_score}");
             UpdateScoreUI();
         }
 
